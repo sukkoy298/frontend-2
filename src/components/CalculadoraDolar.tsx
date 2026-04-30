@@ -36,24 +36,40 @@ export default function CalculadoraDolar({ hideTitle = false, hideLink = false }
   }, []);
 
   const handleUsdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9.]/g, '');
+    let value = e.target.value.replace(/[^0-9.]/g, '');
+    
+    // Evitar múltiples puntos decimales
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+
     setUsdAmount(value);
-    setBsAmount('');
+    
+    if (value && price && !isNaN(parseFloat(value))) {
+      setBsAmount((parseFloat(value) * price).toFixed(2));
+    } else {
+      setBsAmount('');
+    }
   };
 
   const handleBsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9.]/g, '');
+    let value = e.target.value.replace(/[^0-9.]/g, '');
+    
+    // Evitar múltiples puntos decimales
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+
     setBsAmount(value);
-    setUsdAmount('');
+    
+    if (value && price && !isNaN(parseFloat(value))) {
+      setUsdAmount((parseFloat(value) / price).toFixed(2));
+    } else {
+      setUsdAmount('');
+    }
   };
-
-  const calculateFromUsd = usdAmount && price
-    ? (parseFloat(usdAmount) * price).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : '0';
-
-  const calculateFromBs = bsAmount && price
-    ? (parseFloat(bsAmount) / price).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : '0';
 
   return (
     <div className="w-full max-w-md font-sans">
@@ -111,24 +127,7 @@ export default function CalculadoraDolar({ hideTitle = false, hideLink = false }
           </div>
         </div>
 
-        <div className="mt-6 p-5 bg-zinc-950 rounded-xl text-center border border-zinc-800">
-          <p className="text-gray-500 text-xs uppercase tracking-widest mb-2">Resultado</p>
-          {usdAmount && (
-            <p className="font-mono text-2xl font-bold text-white mb-2">
-              {calculateFromUsd} <span className="text-gray-400 text-base">BS</span>
-            </p>
-          )}
-          {bsAmount && (
-            <p className="font-mono text-2xl font-bold text-white">
-              {calculateFromBs} <span className="text-gray-400 text-base">USD</span>
-            </p>
-          )}
-          {!usdAmount && !bsAmount && (
-            <p className="font-mono text-2xl font-bold text-gray-500">
-              0.00
-            </p>
-          )}
-        </div>
+
 
         <button
           onClick={fetchPrice}

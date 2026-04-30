@@ -36,24 +36,38 @@ export default function CalculadoraUsdt({ hideTitle = false, hideLink = false }:
   }, []);
 
   const handleUsdtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9.]/g, '');
+    let value = e.target.value.replace(/[^0-9.]/g, '');
+    
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+
     setUsdtAmount(value);
-    setBsAmount('');
+    
+    if (value && price && !isNaN(parseFloat(value))) {
+      setBsAmount((parseFloat(value) * price).toFixed(2));
+    } else {
+      setBsAmount('');
+    }
   };
 
   const handleBsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9.]/g, '');
+    let value = e.target.value.replace(/[^0-9.]/g, '');
+    
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+
     setBsAmount(value);
-    setUsdtAmount('');
+    
+    if (value && price && !isNaN(parseFloat(value))) {
+      setUsdtAmount((parseFloat(value) / price).toFixed(2));
+    } else {
+      setUsdtAmount('');
+    }
   };
-
-  const calculateFromUsdt = usdtAmount && price
-    ? (parseFloat(usdtAmount) * price).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : '0';
-
-  const calculateFromBs = bsAmount && price
-    ? (parseFloat(bsAmount) / price).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : '0';
 
   return (
     <div className="w-full max-w-md font-sans">
@@ -114,24 +128,7 @@ export default function CalculadoraUsdt({ hideTitle = false, hideLink = false }:
           </div>
         </div>
 
-        <div className="mt-6 p-5 bg-zinc-950 rounded-xl text-center border border-zinc-800">
-          <p className="text-gray-500 text-xs uppercase tracking-widest mb-2">Resultado</p>
-          {usdtAmount && (
-            <p className="font-mono text-2xl font-bold text-white mb-2">
-              {calculateFromUsdt} <span className="text-gray-400 text-base">BS</span>
-            </p>
-          )}
-          {bsAmount && (
-            <p className="font-mono text-2xl font-bold text-white">
-              {calculateFromBs} <span className="text-gray-400 text-base">USDT</span>
-            </p>
-          )}
-          {!usdtAmount && !bsAmount && (
-            <p className="font-mono text-2xl font-bold text-gray-500">
-              0.00
-            </p>
-          )}
-        </div>
+
 
         <button
           onClick={fetchPrice}
