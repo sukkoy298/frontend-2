@@ -16,7 +16,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/dolarBcv', { mode: 'cors' });
+      const response = await fetch('/api/euroBcv', { mode: 'cors' });
       const data = await response.json();
       const priceEl = data.price;
       if (!priceEl) throw new Error('Precio no encontrado');
@@ -37,7 +37,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
 
   const handleEurChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/[^0-9.]/g, '');
-    
+
     // Evitar múltiples puntos decimales
     const parts = value.split('.');
     if (parts.length > 2) {
@@ -45,7 +45,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
     }
 
     setEurAmount(value);
-    
+
     if (value && price && !isNaN(parseFloat(value))) {
       setBsAmount((parseFloat(value) * price).toFixed(2));
     } else {
@@ -55,7 +55,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
 
   const handleBsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/[^0-9.]/g, '');
-    
+
     // Evitar múltiples puntos decimales
     const parts = value.split('.');
     if (parts.length > 2) {
@@ -63,7 +63,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
     }
 
     setBsAmount(value);
-    
+
     if (value && price && !isNaN(parseFloat(value))) {
       setEurAmount((parseFloat(value) / price).toFixed(2));
     } else {
@@ -76,7 +76,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
       {!hideTitle && (
         <div className="text-center mb-8">
           <h1 className="font-mono text-sm tracking-widest text-gray-500 uppercase mb-2">
-            Dólar BCV Venezuela
+            Euro BCV Venezuela
           </h1>
         </div>
       )}
@@ -86,7 +86,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
         <p className="text-gray-400 text-sm mb-2">Precio actual</p>
         <p className="font-mono text-5xl font-bold text-blue-500 leading-none">
-          {loading ? '...' : price}
+          {loading ? '...' : price?.toFixed(4)}
           {!loading && <span className="text-gray-400 text-lg ml-1">Bs</span>}
         </p>
         {lastUpdate && (
