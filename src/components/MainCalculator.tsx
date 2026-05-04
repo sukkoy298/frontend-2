@@ -10,13 +10,13 @@ export default function MainCalculator({ initialTab = 'bcv' }: { initialTab?: 'b
 
   return (
     <div className="w-full max-w-md">
-      <div className="flex p-1 bg-zinc-900 border border-zinc-800 rounded-xl mb-6 relative">
+      <div className="flex p-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl mb-6 relative shadow-sm">
         <button
           onClick={() => setActiveTab('bcv')}
           className={`flex-1 py-2.5 text-xs font-mono tracking-widest transition-all rounded-lg z-10 ${
             activeTab === 'bcv'
-              ? 'text-white'
-              : 'text-gray-500 hover:text-gray-300'
+              ? 'text-zinc-900 dark:text-white'
+              : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
           }`}
         >
           DÓLAR BCV
@@ -25,8 +25,8 @@ export default function MainCalculator({ initialTab = 'bcv' }: { initialTab?: 'b
           onClick={() => setActiveTab('euro')}
           className={`flex-1 py-2.5 text-xs font-mono tracking-widest transition-all rounded-lg z-10 ${
             activeTab === 'euro'
-              ? 'text-white'
-              : 'text-gray-500 hover:text-gray-300'
+              ? 'text-zinc-900 dark:text-white'
+              : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
           }`}
         >
           EURO BCV
@@ -35,8 +35,8 @@ export default function MainCalculator({ initialTab = 'bcv' }: { initialTab?: 'b
           onClick={() => setActiveTab('usdt')}
           className={`flex-1 py-2.5 text-xs font-mono tracking-widest transition-all rounded-lg z-10 ${
             activeTab === 'usdt'
-              ? 'text-white'
-              : 'text-gray-500 hover:text-gray-300'
+              ? 'text-zinc-900 dark:text-white'
+              : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
           }`}
         >
           DÓLAR USDT
@@ -44,7 +44,7 @@ export default function MainCalculator({ initialTab = 'bcv' }: { initialTab?: 'b
         
         {/* Active Indicator Slider */}
         <div 
-          className="absolute top-1 bottom-1 rounded-lg transition-all duration-300 ease-out bg-zinc-800 border border-zinc-700 shadow-xl"
+          className="absolute top-1 bottom-1 rounded-lg transition-all duration-300 ease-out bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-md"
           style={{
             width: 'calc(33.333% - 2.66px)',
             left: '4px',

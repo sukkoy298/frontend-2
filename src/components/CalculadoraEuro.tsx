@@ -82,48 +82,48 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
       )}
 
 
-      <div className={`bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center mb-6 relative overflow-hidden ${loading ? 'opacity-50' : ''}`}>
+      <div className={`bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 text-center mb-6 relative overflow-hidden shadow-sm ${loading ? 'opacity-50' : ''}`}>
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-        <p className="text-gray-400 text-sm mb-2">Precio actual</p>
-        <p className="font-mono text-5xl font-bold text-blue-500 leading-none">
+        <p className="text-zinc-500 dark:text-gray-400 text-sm mb-2">Precio actual</p>
+        <p className="font-mono text-5xl font-bold text-blue-600 dark:text-blue-500 leading-none">
           {loading ? '...' : price?.toFixed(4)}
-          {!loading && <span className="text-gray-400 text-lg ml-1">Bs</span>}
+          {!loading && <span className="text-zinc-400 dark:text-gray-400 text-lg ml-1">Bs</span>}
         </p>
         {lastUpdate && (
-          <p className="text-gray-500 text-xs mt-4 font-mono">
+          <p className="text-zinc-400 dark:text-gray-500 text-xs mt-4 font-mono">
             Actualizado: {lastUpdate.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' })}
           </p>
         )}
       </div>
 
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-        <p className="text-gray-500 text-xs uppercase tracking-widest mb-5 font-mono">Calculadora</p>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+        <p className="text-zinc-400 dark:text-gray-500 text-xs uppercase tracking-widest mb-5 font-mono">Calculadora</p>
 
         <div className="mb-4">
-          <label className="block text-gray-500 text-xs uppercase tracking-wide mb-2">Monto en euros (EUR)</label>
+          <label className="block text-zinc-500 dark:text-gray-500 text-xs uppercase tracking-wide mb-2">Monto en euros (EUR)</label>
           <div className="relative">
             <input
               type="text"
               value={eurAmount}
               onChange={handleEurChange}
               placeholder="0.00"
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg py-3.5 px-4 text-lg text-white font-mono outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition-all"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3.5 px-4 text-lg text-zinc-900 dark:text-white font-mono outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition-all"
             />
-            <span className="absolute right-4 text-gray-500 font-mono text-sm top-1/2 -translate-y-1/2">EUR</span>
+            <span className="absolute right-4 text-zinc-400 dark:text-gray-500 font-mono text-sm top-1/2 -translate-y-1/2">EUR</span>
           </div>
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-500 text-xs uppercase tracking-wide mb-2">Monto en bolívares (BS)</label>
+          <label className="block text-zinc-500 dark:text-gray-500 text-xs uppercase tracking-wide mb-2">Monto en bolívares (BS)</label>
           <div className="relative">
             <input
               type="text"
               value={bsAmount}
               onChange={handleBsChange}
               placeholder="0.00"
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg py-3.5 px-4 text-lg text-white font-mono outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition-all"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3.5 px-4 text-lg text-zinc-900 dark:text-white font-mono outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition-all"
             />
-            <span className="absolute right-4 text-gray-500 font-mono text-sm top-1/2 -translate-y-1/2">BS</span>
+            <span className="absolute right-4 text-zinc-400 dark:text-gray-500 font-mono text-sm top-1/2 -translate-y-1/2">BS</span>
           </div>
         </div>
 
@@ -131,7 +131,7 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
 
         <button
           onClick={fetchPrice}
-          className="w-full mt-4 py-3 bg-transparent border border-zinc-800 rounded-lg text-gray-400 text-sm font-mono flex items-center justify-center gap-2 hover:border-blue-500 hover:text-blue-500 transition-all cursor-pointer"
+          className="w-full mt-4 py-3 bg-transparent border border-zinc-200 dark:border-zinc-800 rounded-lg text-zinc-500 dark:text-gray-400 text-sm font-mono flex items-center justify-center gap-2 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-500 transition-all cursor-pointer"
         >
           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
