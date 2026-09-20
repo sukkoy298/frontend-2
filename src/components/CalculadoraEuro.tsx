@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import BotonCopiar from './BotonCopiar';
+import { parseTasa, formatTasa } from '@/lib/tasa';
 
 export default function CalculadoraEuro({ hideTitle = false, hideLink = false }: { hideTitle?: boolean, hideLink?: boolean }) {
 
@@ -16,16 +18,17 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/euroBcv', { mode: 'cors' });
+      const response = await fetch('/api/euroBcv', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`El servicio respondió ${response.status}`);
       const data = await response.json();
-      const priceEl = data.price;
-      if (!priceEl) throw new Error('Precio no encontrado');
-      setPrice(parseFloat(priceEl));
+      const valor = parseTasa(data.price);
+      if (valor === null) throw new Error('El servicio no devolvió un precio válido');
+      setPrice(valor);
       setLastUpdate(new Date());
     } catch (err) {
       console.error(err);
       setError(err instanceof Error ? err.message : 'Error desconocido');
-      setPrice(1);
+      setPrice(null);
     } finally {
       setLoading(false);
     }
@@ -86,12 +89,20 @@ export default function CalculadoraEuro({ hideTitle = false, hideLink = false }:
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
         <p className="text-zinc-500 dark:text-gray-400 text-sm mb-2">Precio actual</p>
         <p className="font-mono text-5xl font-bold text-blue-600 dark:text-blue-500 leading-none">
-          {loading ? '...' : price?.toFixed(4)}
-          {!loading && <span className="text-zinc-400 dark:text-gray-400 text-lg ml-1">Bs</span>}
+          {loading ? (
+            '...'
+          ) : price !== null ? (
+            <>
+              {formatTasa(price)}
+              <span className="text-zinc-400 dark:text-gray-400 text-lg ml-1">Bs</span>
+            </>
+          ) : (
+            <span className="text-2xl text-amber-600 dark:text-amber-400">sin datos</span>
+          )}
         </p>
-        {lastUpdate && (
-          <p className="text-zinc-400 dark:text-gray-500 text-xs mt-4 font-mono">
-            Actualizado: {lastUpdate.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' })}
+        {error && (
+          <p className="text-amber-600 dark:text-amber-400 text-xs mt-4 font-mono leading-relaxed">
+            No se pudo leer la tasa. Toca <b>Actualizar precio</b>.
           </p>
         )}
       </div>

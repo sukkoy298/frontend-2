@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import BotonCopiar from './BotonCopiar';
 
 type PriceData = {
   usdt: number | null;
@@ -196,9 +197,12 @@ export default function CalculadoraTotal() {
               value={values.bs}
               onChange={(e) => handleInput('bs', e.target.value)}
               placeholder="0.00"
-              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3 px-4 text-base text-zinc-900 dark:text-white font-mono outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition-all"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3 px-4 pr-24 text-base text-zinc-900 dark:text-white font-mono outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition-all"
             />
-            <span className="absolute right-3 text-violet-500 font-mono text-xs top-1/2 -translate-y-1/2">BS</span>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+              <BotonCopiar montoBs={values.bs} />
+              <span className="text-violet-500 font-mono text-xs">BS</span>
+            </div>
           </div>
         </div>
 
