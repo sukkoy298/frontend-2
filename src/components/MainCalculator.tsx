@@ -60,22 +60,6 @@ export default function MainCalculator({ initialTab = 'bcv' }: { initialTab?: 'b
         {activeTab === 'euro' && <CalculadoraEuro hideTitle hideLink />}
         {activeTab === 'usdt' && <CalculadoraUsdt hideTitle hideLink />}
       </div>
-
-      <div className="mt-8 text-center">
-        <a
-          href="/calculadora"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl text-zinc-400 dark:text-gray-500 text-sm font-mono hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-500 transition-all group shadow-sm"
-        >
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="4" y="2" width="16" height="20" rx="2" />
-            <line x1="8" y1="6" x2="16" y2="6" />
-            <line x1="8" y1="10" x2="16" y2="10" />
-            <line x1="8" y1="14" x2="12" y2="14" />
-          </svg>
-          CALCULADORA COMPLETA
-          <span className="text-purple-500 group-hover:translate-x-0.5 transition-transform">→</span>
-        </a>
-      </div>
     </div>
   );
 }

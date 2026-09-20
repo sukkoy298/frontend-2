@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import BotonCopiar from './BotonCopiar';
+import BotonPagoMovil from './BotonPagoMovil';
 
 type PriceData = {
   usdt: number | null;
@@ -204,6 +205,7 @@ export default function CalculadoraTotal() {
               <span className="text-violet-500 font-mono text-xs">BS</span>
             </div>
           </div>
+          <BotonPagoMovil montoBs={values.bs} />
         </div>
 
         {/* USD Input */}

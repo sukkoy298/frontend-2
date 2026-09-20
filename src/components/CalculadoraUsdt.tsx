@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import BotonCopiar from './BotonCopiar';
+import BotonPagoMovil from './BotonPagoMovil';
 import { parseTasa, formatTasa } from '@/lib/tasa';
 
 export default function CalculadoraUsdt({ hideTitle = false, hideLink = false }: { hideTitle?: boolean, hideLink?: boolean }) {
@@ -133,13 +134,14 @@ export default function CalculadoraUsdt({ hideTitle = false, hideLink = false }:
               value={bsAmount}
               onChange={handleBsChange}
               placeholder="0.00"
-              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3.5 px-4 pr-28 text-lg text-zinc-900 dark:text-white font-mono outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500/30 transition-all"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3.5 px-4 pr-16 text-lg text-zinc-900 dark:text-white font-mono outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500/30 transition-all"
             />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
               <BotonCopiar montoBs={bsAmount} />
               <span className="text-zinc-400 dark:text-gray-500 font-mono text-sm">BS</span>
             </div>
           </div>
+          <BotonPagoMovil montoBs={bsAmount} />
         </div>
 
 
