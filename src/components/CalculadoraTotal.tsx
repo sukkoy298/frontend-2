@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import BotonCopiar from './BotonCopiar';
 import BotonPagoMovil from './BotonPagoMovil';
+import { parseTasa } from '@/lib/tasa';
 
 type PriceData = {
   usdt: number | null;
@@ -38,9 +39,9 @@ export default function CalculadoraTotal() {
       }
 
       setPrices({
-        usdt: parseFloat(usdtData.price),
-        bcv: parseFloat(bcvData.price),
-        euro: parseFloat(euroData.price),
+        usdt: parseTasa(usdtData.price),
+        bcv: parseTasa(bcvData.price),
+        euro: parseTasa(euroData.price),
       });
       setLastUpdate(new Date());
     } catch (err) {

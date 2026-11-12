@@ -1,6 +1,7 @@
 import * as cheerio from 'cheerio';
 import https from 'https';
 import { NextResponse } from 'next/server';
+import { parseTasa } from '@/lib/tasa';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -22,10 +23,9 @@ export async function GET() {
             return NextResponse.json({ error: 'No se pudo encontrar el contenedor de precio' }, { status: 500 });
         }
 
-        const cleanPrice = priceText.replace(',', '.');
-        const price = parseFloat(cleanPrice);
+        const price = parseTasa(priceText);
 
-        if (isNaN(price)) {
+        if (price === null) {
             return NextResponse.json({ error: 'No se pudo parsear el precio' }, { status: 500 });
         }
 
