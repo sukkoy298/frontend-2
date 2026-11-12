@@ -188,27 +188,6 @@ export default function CalculadoraTotal() {
           </div>
         </div>
 
-        {/* BS Input */}
-        <div className="mb-3">
-          <label className="block text-zinc-500 dark:text-gray-500 text-[10px] uppercase tracking-wide mb-1.5 font-mono">
-            Bolívares
-          </label>
-          <div className="relative">
-            <input
-              type="text"
-              value={values.bs}
-              onChange={(e) => handleInput('bs', e.target.value)}
-              placeholder="0.00"
-              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3 px-4 pr-24 text-base text-zinc-900 dark:text-white font-mono outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition-all"
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-              <BotonCopiar montoBs={values.bs} />
-              <span className="text-violet-500 font-mono text-xs">BS</span>
-            </div>
-          </div>
-          <BotonPagoMovil montoBs={values.bs} />
-        </div>
-
         {/* USD Input */}
         <div className="mb-3">
           <label className="block text-zinc-500 dark:text-gray-500 text-[10px] uppercase tracking-wide mb-1.5 font-mono">
@@ -241,6 +220,27 @@ export default function CalculadoraTotal() {
             />
             <span className="absolute right-3 text-blue-600 dark:text-blue-500 font-mono text-xs top-1/2 -translate-y-1/2">EUR</span>
           </div>
+        </div>
+
+        {/* BS Input */}
+        <div className="mb-3">
+          <label className="block text-zinc-500 dark:text-gray-500 text-[10px] uppercase tracking-wide mb-1.5 font-mono">
+            Bolívares
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              value={values.bs}
+              onChange={(e) => handleInput('bs', e.target.value)}
+              placeholder="0.00"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg py-3 px-4 pr-24 text-base text-zinc-900 dark:text-white font-mono outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition-all"
+            />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+              <BotonCopiar montoBs={values.bs} />
+              <span className="text-violet-500 font-mono text-xs">BS</span>
+            </div>
+          </div>
+          <BotonPagoMovil montoBs={values.bs} />
         </div>
 
         {/* Refresh button */}
